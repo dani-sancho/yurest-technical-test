@@ -1,0 +1,297 @@
+{
+  "mesas": [
+    {
+      "id": 1,
+      "nombre": "Mesa 1",
+      "capacidad": 2,
+      "ubicacion": "interior",
+      "activa": true
+    },
+    {
+      "id": 2,
+      "nombre": "Mesa 2",
+      "capacidad": 4,
+      "ubicacion": "interior",
+      "activa": true
+    },
+    {
+      "id": 3,
+      "nombre": "Mesa 3",
+      "capacidad": 4,
+      "ubicacion": "interior",
+      "activa": true
+    },
+    {
+      "id": 4,
+      "nombre": "Mesa 4",
+      "capacidad": 6,
+      "ubicacion": "interior",
+      "activa": true
+    },
+    {
+      "id": 5,
+      "nombre": "Mesa 5",
+      "capacidad": 6,
+      "ubicacion": "interior",
+      "activa": true
+    },
+    {
+      "id": 6,
+      "nombre": "Terraza 1",
+      "capacidad": 2,
+      "ubicacion": "terraza",
+      "activa": true
+    },
+    {
+      "id": 7,
+      "nombre": "Terraza 2",
+      "capacidad": 4,
+      "ubicacion": "terraza",
+      "activa": true
+    },
+    {
+      "id": 8,
+      "nombre": "Terraza 3",
+      "capacidad": 4,
+      "ubicacion": "terraza",
+      "activa": true
+    },
+    {
+      "id": 9,
+      "nombre": "Privado",
+      "capacidad": 10,
+      "ubicacion": "sala privada",
+      "activa": true
+    },
+    {
+      "id": 10,
+      "nombre": "Barra 1",
+      "capacidad": 2,
+      "ubicacion": "barra",
+      "activa": false
+    }
+  ],
+  "reservas": [
+    {
+      "id": 1,
+      "mesaId": 2,
+      "cliente": "Carlos Martínez",
+      "fecha": "2025-07-10",
+      "hora": "13:30",
+      "comensales": 3,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 2,
+      "mesaId": 4,
+      "cliente": "Laura Gómez",
+      "fecha": "2025-07-10",
+      "hora": "14:00",
+      "comensales": 5,
+      "estado": "cancelada",
+      "notas": "Celebración de cumpleaños"
+    },
+    {
+      "id": 3,
+      "mesaId": 6,
+      "cliente": "Pedro Sánchez",
+      "fecha": "2025-07-10",
+      "hora": "14:00",
+      "comensales": 2,
+      "estado": "pendiente",
+      "notas": ""
+    },
+    {
+      "id": 4,
+      "mesaId": 1,
+      "cliente": "Ana Torres",
+      "fecha": "2025-07-10",
+      "hora": "21:00",
+      "comensales": 2,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 5,
+      "mesaId": 3,
+      "cliente": "Miguel Fernández",
+      "fecha": "2025-07-10",
+      "hora": "21:30",
+      "comensales": 4,
+      "estado": "pendiente",
+      "notas": "Alergia al gluten"
+    },
+    {
+      "id": 6,
+      "mesaId": 9,
+      "cliente": "Empresa Soluciones SL",
+      "fecha": "2025-07-10",
+      "hora": "14:00",
+      "comensales": 9,
+      "estado": "confirmada",
+      "notas": "Comida de empresa, menú cerrado"
+    },
+    {
+      "id": 7,
+      "mesaId": 5,
+      "cliente": "Rosa Ibáñez",
+      "fecha": "2025-07-11",
+      "hora": "13:30",
+      "comensales": 6,
+      "estado": "pendiente",
+      "notas": ""
+    },
+    {
+      "id": 8,
+      "mesaId": 7,
+      "cliente": "David Ruiz",
+      "fecha": "2025-07-11",
+      "hora": "14:00",
+      "comensales": 3,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 9,
+      "mesaId": 2,
+      "cliente": "Sofía Molina",
+      "fecha": "2025-07-11",
+      "hora": "21:00",
+      "comensales": 4,
+      "estado": "pendiente",
+      "notas": "Mesa junto a la ventana si es posible"
+    },
+    {
+      "id": 10,
+      "mesaId": 4,
+      "cliente": "Jorge Navarro",
+      "fecha": "2025-07-11",
+      "hora": "21:30",
+      "comensales": 6,
+      "estado": "cancelada",
+      "notas": ""
+    },
+    {
+      "id": 11,
+      "mesaId": 8,
+      "cliente": "Elena Castro",
+      "fecha": "2025-07-12",
+      "hora": "13:30",
+      "comensales": 2,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 12,
+      "mesaId": 3,
+      "cliente": "Marcos Delgado",
+      "fecha": "2025-07-12",
+      "hora": "14:00",
+      "comensales": 3,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 13,
+      "mesaId": 1,
+      "cliente": "Lucía Herrero",
+      "fecha": "2025-07-12",
+      "hora": "21:00",
+      "comensales": 2,
+      "estado": "cancelada",
+      "notas": "Canceló por enfermedad"
+    },
+    {
+      "id": 14,
+      "mesaId": 9,
+      "cliente": "Grupo Familiar Pérez",
+      "fecha": "2025-07-13",
+      "hora": "14:00",
+      "comensales": 8,
+      "estado": "confirmada",
+      "notas": "Aniversario de boda, decoración especial"
+    },
+    {
+      "id": 15,
+      "mesaId": 6,
+      "cliente": "Iván Morales",
+      "fecha": "2025-07-13",
+      "hora": "21:00",
+      "comensales": 2,
+      "estado": "pendiente",
+      "notas": ""
+    },
+    {
+      "id": 16,
+      "mesaId": 5,
+      "cliente": "Beatriz Ortega",
+      "fecha": "2025-07-14",
+      "hora": "13:30",
+      "comensales": 5,
+      "estado": "cancelada",
+      "notas": ""
+    },
+    {
+      "id": 17,
+      "mesaId": 2,
+      "cliente": "Raúl Jiménez",
+      "fecha": "2025-07-14",
+      "hora": "14:00",
+      "comensales": 4,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 18,
+      "mesaId": 7,
+      "cliente": "Nuria Blanco",
+      "fecha": "2025-07-14",
+      "hora": "21:30",
+      "comensales": 4,
+      "estado": "cancelada",
+      "notas": "Intolerancia a la lactosa"
+    },
+    {
+      "id": 19,
+      "mesaId": 4,
+      "cliente": "Alberto Vega",
+      "fecha": "2025-07-15",
+      "hora": "14:00",
+      "comensales": 6,
+      "estado": "confirmada",
+      "notas": ""
+    },
+    {
+      "id": 20,
+      "mesaId": 3,
+      "cliente": "Carmen Ríos",
+      "fecha": "2025-07-15",
+      "hora": "21:00",
+      "comensales": 3,
+      "estado": "pendiente",
+      "notas": ""
+    },
+    {
+      "cliente": "Daniel Sancho",
+      "fecha": "2026-07-23",
+      "hora": "11:45",
+      "mesaId": 1,
+      "comensales": 2,
+      "notas": "Cena en pareja",
+      "estado": "cancelada",
+      "id": 21
+    },
+    {
+      "cliente": "Daniel Sancho Jara",
+      "fecha": "2026-07-28",
+      "hora": "12:15",
+      "mesaId": 3,
+      "comensales": 4,
+      "notas": "Vamos a ver el partido",
+      "estado": "confirmada",
+      "id": 22
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

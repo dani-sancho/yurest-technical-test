@@ -1,0 +1,54 @@
+<div class="rounded-2xl border border-slate-100 bg-white p-5">
+  <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <h2 class="text-base font-semibold text-slate-900">Filtrar reservas</h2>
+      <p class="text-xs text-slate-500">Busca por estado, mesa o fecha</p>
+    </div>
+    @if (hasActive) {
+      <button type="button" (click)="onClear()" class="self-start flex items-center gap-1 text-xs font-semibold text-rose-600 hover:text-rose-700 transition-colors">
+        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        Limpiar filtros
+      </button>
+    }
+  </div>
+
+  <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="space-y-1.5">
+      <label for="f-status" class="text-xs font-medium text-slate-600">Estado</label>
+      <div class="relative">
+        <select id="f-status" [ngModel]="selectedStatus()" (ngModelChange)="onStatus($event)"
+          class="w-full appearance-none rounded-xl border border-slate-200 bg-white px-3 py-2.5 pr-10 text-sm text-slate-800 transition-all focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900">
+          <option value="">Todos</option>
+          <option value="pendiente">Pendiente</option>
+          <option value="confirmada">Confirmada</option>
+          <option value="cancelada">Cancelada</option>
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-1.5">
+      <label for="f-table" class="text-xs font-medium text-slate-600">Mesa</label>
+      <div class="relative">
+        <select id="f-table" [ngModel]="selectedTableId() ?? ''" (ngModelChange)="onTable($event)"
+          class="w-full appearance-none rounded-xl border border-slate-200 bg-white px-3 py-2.5 pr-10 text-sm text-slate-800 transition-all focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900">
+          <option value="">Todas</option>
+          @for (t of tables(); track t.id) {
+            <option [value]="t.id">{{ t.nombre }} ({{ t.capacidad }})</option>
+          }
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-1.5">
+      <label for="f-date" class="text-xs font-medium text-slate-600">Fecha</label>
+      <input id="f-date" type="date" [ngModel]="selectedDate()" (ngModelChange)="onDate($event)"
+        class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-800 transition-all focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900" />
+    </div>
+  </div>
+</div>

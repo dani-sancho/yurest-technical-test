@@ -1,0 +1,123 @@
+<div class="min-h-screen bg-slate-50/50 text-slate-800 antialiased">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <header class="mb-8 flex items-center gap-4 border-b border-slate-100 pb-6">
+      <app-button variant="icon" (handler)="goBack()">
+        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+      </app-button>
+      <div>
+        <h1 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Nueva Reserva</h1>
+        <p class="mt-1 text-sm text-slate-500">Completa los campos para registrar una nueva reserva.</p>
+      </div>
+    </header>
+
+    <!-- Form -->
+    <div class="mx-auto max-w-xl rounded-2xl border border-slate-100 bg-white p-6 shadow-sm sm:p-8">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5" novalidate>
+
+        <!-- Cliente -->
+        <div class="space-y-1.5">
+          <label for="cliente" class="text-xs font-semibold text-slate-700">Nombre del cliente</label>
+          <input id="cliente" type="text" formControlName="cliente" placeholder="Ej. Juan Pérez" 
+            class="w-full rounded-xl border px-3.5 py-2.5 text-sm transition-all focus:outline-none focus:ring-1 bg-white shadow-sm placeholder:text-slate-400"
+            [class.border-rose-300]="hasError('cliente')"
+            [class.text-rose-900]="hasError('cliente')"
+            [class.focus:border-rose-500]="hasError('cliente')"
+            [class.border-slate-200]="!hasError('cliente')" />
+          @if (isFieldInvalid('cliente')) {
+            <p class="text-xs text-rose-600 font-medium flex items-center gap-1 mt-1">
+              <svg class="h-3 w-3 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" /></svg>
+              {{ getFieldError('cliente') }}
+            </p>
+          }
+        </div>
+
+        <!-- Fecha + Hora -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div class="space-y-1.5">
+            <label for="fecha" class="text-xs font-semibold text-slate-700">Fecha</label>
+            <input id="fecha" type="date" formControlName="fecha" [min]="today"
+            class="w-full rounded-xl border px-3.5 py-2.5 text-sm transition-all focus:outline-none focus:ring-1 bg-white shadow-sm placeholder:text-slate-400"
+            [class.border-rose-300]="hasError('fecha')"
+            [class.text-rose-900]="hasError('fecha')"
+            [class.focus:border-rose-500]="hasError('fecha')"
+            [class.border-slate-200]="!hasError('fecha')" />
+            @if (isFieldInvalid('fecha')) {
+              <p class="text-xs text-rose-600 font-medium mt-1">{{ getFieldError('fecha') }}</p>
+            }
+          </div>
+          <div class="space-y-1.5">
+            <label for="hora" class="text-xs font-semibold text-slate-700">Hora</label>
+            <input id="hora" type="time" formControlName="hora"
+            class="w-full rounded-xl border px-3.5 py-2.5 text-sm transition-all focus:outline-none focus:ring-1 bg-white shadow-sm placeholder:text-slate-400"
+            [class.border-rose-300]="hasError('hora')"
+            [class.text-rose-900]="hasError('hora')"
+            [class.focus:border-rose-500]="hasError('hora')"
+            [class.border-slate-200]="!hasError('hora')"/>
+            @if (isFieldInvalid('hora')) {
+              <p class="text-xs text-rose-600 font-medium mt-1">{{ getFieldError('hora') }}</p>
+            }
+          </div>
+        </div>
+
+        <!-- Mesa + Comensales -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div class="space-y-1.5">
+            <label for="mesaId" class="text-xs font-semibold text-slate-700">Mesa</label>
+            <div class="relative">
+              <select id="mesaId" formControlName="mesaId" class="w-full appearance-none rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 pr-10 text-sm text-slate-800 shadow-sm transition-all focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900">
+                <option value="" disabled>Selecciona una mesa...</option>
+                @for (t of tables(); track t.id) {
+                  <option [value]="t.id">{{ t.nombre }} ({{ t.capacidad }} pers) - {{ t.ubicacion }}</option>
+                }
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400">
+                <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" /></svg>
+              </div>
+            </div>
+            @if (isFieldInvalid('mesaId')) {
+              <p class="text-xs text-rose-600 font-medium mt-1">{{ getFieldError('mesaId') }}</p>
+            }
+          </div>
+          <div class="space-y-1.5">
+            <label for="comensales" class="text-xs font-semibold text-slate-700">
+              Comensales
+              @if (form.get('mesaId')?.value) {
+                <span class="ml-1 font-normal text-slate-400">(máx. {{ maxComensales() }})</span>
+              }
+            </label>
+            <input id="comensales" type="number" formControlName="comensales" placeholder="Ej. 4"
+            class="w-full rounded-xl border px-3.5 py-2.5 text-sm transition-all focus:outline-none focus:ring-1 bg-white shadow-sm placeholder:text-slate-400"
+            [class.border-rose-300]="hasError('comensales')"
+            [class.text-rose-900]="hasError('comensales')"
+            [class.focus:border-rose-500]="hasError('comensales')"
+            [class.border-slate-200]="!hasError('comensales')" />
+            @if (isFieldInvalid('comensales')) {
+              <p class="text-xs text-rose-600 font-medium mt-1">{{ getFieldError('comensales') }}</p>
+            }
+          </div>
+        </div>
+
+        <!-- Notas -->
+        <div class="space-y-1.5">
+          <label for="notas" class="text-xs font-semibold text-slate-700">Notas (opcional)</label>
+          <textarea id="notas" formControlName="notas" rows="3" placeholder="Alergias, celebración especial..."
+            class="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 shadow-sm transition-all placeholder:text-slate-400 focus:border-slate-900 focus:outline-none focus:ring-1 focus:ring-slate-900"></textarea>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col-reverse gap-3 border-t border-slate-100 pt-4 sm:flex-row sm:justify-end">
+          <app-button variant="secondary" type="button" [disabled]="isSubmitting()" (handler)="onReset()">
+            Restablecer
+          </app-button>
+          <app-button variant="primary" type="submit" [disabled]="isSubmitting()" [loading]="isSubmitting()" loadingLabel="Guardando...">
+            Guardar reserva
+          </app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

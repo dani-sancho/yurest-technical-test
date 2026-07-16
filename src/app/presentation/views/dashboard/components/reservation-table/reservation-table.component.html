@@ -1,0 +1,59 @@
+<div class="rounded-2xl border border-slate-100 bg-white overflow-hidden">
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-sm">
+      <thead>
+        <tr class="border-b border-slate-100 bg-slate-50/50">
+          @for (col of cols; track col.label) {
+            <th scope="col" class="px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-slate-500">
+              @if (col.key) {
+                <button type="button" class="inline-flex items-center gap-1 -ml-1 rounded-lg px-1 py-0.5 transition-colors hover:bg-slate-100"
+                  (click)="onSort(col.key!)">
+                  {{ col.label }}
+                  <svg class="h-3.5 w-3.5 shrink-0" [class.text-slate-900]="sortKey() === col.key" [class.text-slate-300]="sortKey() !== col.key" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                    @if (sortKey() === col.key && sortDir() === 'desc') {
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    } @else {
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                    }
+                  </svg>
+                </button>
+              } @else {
+                {{ col.label }}
+              }
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-slate-100">
+        @for (res of reservations(); track res.id) {
+          <tr class="cursor-pointer hover:bg-slate-50/50 transition-colors" (click)="onRowClick(res, $event)">
+            <td class="whitespace-nowrap px-5 py-4 font-mono text-xs font-semibold text-slate-400">#{{ res.id }}</td>
+            <td class="whitespace-nowrap px-5 py-4">
+              <span class="font-semibold text-slate-900">{{ res.cliente }}</span>
+              @if (res.notas) {
+                <span class="ml-2 max-w-[200px] truncate text-xs text-slate-400 inline-block leading-3" [title]="res.notas">{{ res.notas }}</span>
+              }
+            </td>
+            <td class="whitespace-nowrap px-5 py-4 text-sm font-medium text-slate-700">{{ tableName(res.mesaId)() }}</td>
+            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{{ fmtDate(res.fecha) }}</td>
+            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{{ res.hora }}</td>
+            <td class="whitespace-nowrap px-5 py-4 text-sm text-slate-600">{{ res.comensales }}</td>
+            <td class="whitespace-nowrap px-5 py-4"><app-status-badge [status]="res.estado" /></td>
+            <td class="whitespace-nowrap px-5 py-4 text-right">
+              <div class="flex justify-end gap-2">
+                <app-button variant="success" size="sm" [disabled]="!canConfirm(res.estado)" [loading]="loadingIds().has(res.id)" loadingLabel="Confirmando..." (handler)="confirm.emit(res.id)">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" /></svg>
+                  Confirmar
+                </app-button>
+                <app-button variant="danger" size="sm" [disabled]="!canCancel(res.estado)" [loading]="loadingIds().has(res.id)" loadingLabel="Cancelando..." (handler)="cancel.emit(res.id)">
+                  <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                  Cancelar
+                </app-button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
