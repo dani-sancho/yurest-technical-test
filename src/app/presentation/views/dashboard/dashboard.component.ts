@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   protected readonly limit = signal(10);
   protected readonly total = signal(0);
   protected readonly sortKey = signal<SortKey>('id');
-  protected readonly sortDir = signal<'asc' | 'desc'>('asc');
+  protected readonly sortDir = signal<'asc' | 'desc'>('desc');
   protected readonly filterStatus = signal('');
   protected readonly filterTableId = signal<number | null>(null);
   protected readonly filterDate = signal('');
@@ -68,7 +68,6 @@ export class DashboardComponent implements OnInit {
   }
 
   protected onFilters(e: { status: string; tableId: number | null; date: string }) {
-    console.log(e);
     this.filterStatus.set(e.status);
     this.filterTableId.set(e.tableId);
     this.filterDate.set(e.date);
